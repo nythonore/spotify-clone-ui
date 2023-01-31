@@ -1,15 +1,17 @@
 import { NavBar, SideBar } from '@/components/elements';
+import { useWindowSize } from '@/hooks';
 import { useEffect, useState } from 'react';
 import { Outlet, ScrollRestoration, useLocation } from 'react-router-dom';
 
 export const AppLayout = () => {
 	const [showMobileSidebar, setShowMobileSidebar] = useState(false);
 
+	const size = useWindowSize();
 	const location = useLocation();
 
 	useEffect(() => {
 		setShowMobileSidebar(false);
-	}, [location.pathname]);
+	}, [location.pathname, size]);
 
 	return (
 		<>
