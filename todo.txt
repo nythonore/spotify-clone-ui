@@ -1,0 +1,6 @@
+LOGIC
+  - On load look for access token in redux
+  - If request fail with expired token
+    - Refresh token.
+    - Get new token.
+    - Reload request again.
