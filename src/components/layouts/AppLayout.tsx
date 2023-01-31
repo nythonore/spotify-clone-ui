@@ -1,21 +1,38 @@
 import { NavBar, SideBar } from '@/components/elements';
-import { Outlet, ScrollRestoration } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { Outlet, ScrollRestoration, useLocation } from 'react-router-dom';
 
 export const AppLayout = () => {
+	const [showMobileSidebar, setShowMobileSidebar] = useState(false);
+
+	const location = useLocation();
+
+	useEffect(() => {
+		setShowMobileSidebar(false);
+	}, [location.pathname]);
+
 	return (
 		<>
 			<div className='flex'>
-				<div className='hidden lg:block'>
-					<SideBar />
-				</div>
+				{showMobileSidebar && (
+					<SideBar toggleSideBar={() => setShowMobileSidebar(false)} />
+				)}
 
-				<div className='min-h-screen w-full overflow-auto bg-gray lg:ml-64'>
-					<NavBar />
+				{!showMobileSidebar && (
+					<>
+						<div className='hidden lg:block'>
+							<SideBar toggleSideBar={() => setShowMobileSidebar(false)} />
+						</div>
 
-					<main className='overflow-hidden'>
-						<Outlet />
-					</main>
-				</div>
+						<div className='min-h-screen w-full bg-gray lg:ml-64'>
+							<NavBar toggleSideBar={() => setShowMobileSidebar(true)} />
+
+							<main className='overflow-hidden'>
+								<Outlet />
+							</main>
+						</div>
+					</>
+				)}
 			</div>
 
 			<ScrollRestoration />

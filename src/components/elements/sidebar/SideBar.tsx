@@ -1,7 +1,11 @@
 import clsx from 'clsx';
 import { Link, NavLink } from 'react-router-dom';
 
-export const SideBar = () => {
+interface SideBarProps {
+	toggleSideBar: () => void;
+}
+
+export const SideBar = ({ toggleSideBar }: SideBarProps) => {
 	const menus = [
 		{
 			icon: <i className='bi bi-house-door-fill text-2xl'></i>,
@@ -21,8 +25,8 @@ export const SideBar = () => {
 	];
 
 	return (
-		<aside className='fixed left-0 top-0 z-10 min-h-screen w-64 bg-dark'>
-			<div className='p-6'>
+		<aside className='fixed left-0 top-0 z-10 min-h-screen w-full bg-dark lg:w-64'>
+			<div className='flex items-center justify-between p-6'>
 				<Link to='/'>
 					<img
 						alt='spotify'
@@ -30,6 +34,12 @@ export const SideBar = () => {
 						className='w-32'
 					/>
 				</Link>
+
+				<div>
+					<button className='btn text-white lg:hidden' onClick={toggleSideBar}>
+						<i className='bi bi-x-lg text-2xl'></i>
+					</button>
+				</div>
 			</div>
 
 			<ul className='space-y-2 py-2 px-6'>

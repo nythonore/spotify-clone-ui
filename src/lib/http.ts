@@ -25,7 +25,7 @@ http.interceptors.response.use(
 
 		if (error.response.status === 401) {
 			try {
-				const { data } = await http.post(
+				const { data } = await axios.post(
 					`${config.SPOTIFY_ACCOUNT_API}/token`,
 					{
 						grant_type: 'client_credentials',

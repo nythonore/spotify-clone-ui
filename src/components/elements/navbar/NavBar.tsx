@@ -3,7 +3,11 @@ import { useCustomSearchParams } from '@/hooks';
 import { useMemo } from 'react';
 import { useLocation } from 'react-router-dom';
 
-export const NavBar = () => {
+interface NavBarProps {
+	toggleSideBar: () => void;
+}
+
+export const NavBar = ({ toggleSideBar }: NavBarProps) => {
 	const location = useLocation();
 	const { query } = useCustomSearchParams();
 
@@ -14,6 +18,18 @@ export const NavBar = () => {
 
 	return (
 		<nav className='sticky top-0 z-10 bg-black/70 backdrop-blur-sm'>
+			<div className='container flex items-center justify-between py-3 lg:hidden'>
+				<img
+					alt='spotify'
+					src='https://storage.googleapis.com/pr-newsroom-wp/1/2018/11/Spotify_Logo_RGB_White.png'
+					className='w-28'
+				/>
+
+				<button className='btn text-white' onClick={toggleSideBar}>
+					<i className='bi bi-list text-2xl'></i>
+				</button>
+			</div>
+
 			<div className='container flex items-center justify-between py-2'>
 				<div className='flex items-center gap-6'>
 					<div className='space-x-6 lg:space-x-8'>
